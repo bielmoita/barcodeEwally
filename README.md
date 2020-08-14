@@ -23,6 +23,6 @@ Execute o comando: **ng serve -o**
 
 Aguarde abrir a janela do seu navegador com o projeto.
 
-PS - Nota de atualização: O Método GET esta funconando perfeitamente, o método POST esta em Imeplementação.
+PS - Nota de atualização: O Método GET esta funcionando perfeitamente, o método POST esta em Implementação.
 
 
