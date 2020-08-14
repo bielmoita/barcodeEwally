@@ -1,0 +1,30 @@
+label{
+    margin-bottom: 0;
+}
+
+input{
+    margin: 15px 0 15px;
+}
+
+
+h1{
+    font-size: 2rem;
+}
+
+body{
+    width: 100%;
+}
+
+.container-search{
+    flex-direction: column;
+    align-items:center;
+}
+
+@media only screen and (min-width: 376px) {
+    .container-search{
+        flex-direction: row;
+    }
+    input{
+        margin: 0 5px;
+    }    
+ }

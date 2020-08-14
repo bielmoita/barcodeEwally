@@ -1,16 +1,40 @@
-<body>
-    <div>
+    <div class="container mb-3">
         <h1> Identificador de Código de barras</h1>
         <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores rem ipsam eum facere voluptas totam nisi accusantium exercitationem, pariatur id minus nesciunt alias consequatur dolorum ad sunt hic! Provident, optio!
-        </p>
-
-        <p>
-            Agora, pode favor, digite seu código de barras:
+            Já parou pra pensar naqueles códigos de barra que voce recebe? O que eles significam?<br>
+            Eles podem dizer bem mais do que voce pensa, vamos lá:<br>
+            Agora, por favor, digite seu código de barras:
         </p>
         <hr>
-        <input type="text" placeholder="Digite aqui seu código de barras" maxlength="45" size="57">
-        <button class="btn btn-success">Verificar</button>
+        <div class="form-group d-flex container-search">
+
+            <label for="codeBarDigitado" class="text-monospace">Codigo de Barra: </label>
+            <input type="text" maxlength="45" size="30" placeholder="Digite aqui seu código de barras" >
+            <button class="btn btn-success" (click)="verificar()">Verificar</button>
+
+        </div>
+        <div class="card" *ngFor="let linha of linhaDig">
+            <div class="card-header">
+                ID: {{ linha.codigoConsulta }}
+            </div>
+
+            <div class="card-body">
+
+                <p>
+                    Numero Digitado: {{linha.codeBarDigitado}}
+                </p>
+                <p>
+                    Numero Calculado: {{linha.linhaCalculada}}
+                </p>
+                <p>
+                    Data de pagamento: {{linha.dataPagamento | date:'dd/MM/yyyy'}} até {{linha.dataPagamento | date: 'HH:mm' }}
+                </p>
+                <p>
+                    Valor a ser pago: {{linha.valorDocumento}}
+                </p>
+               
+            </div>
+
+        </div>
 
     </div>
-</body>
