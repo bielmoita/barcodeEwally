@@ -18,7 +18,11 @@ public class Linha {
 	
 	@NotNull
 	@Size(min =44, max = 46)
-	private String linhaDigitada;
+	public String codeBarDigitado;
+	
+	@NotNull
+	public String calculaLinha;
+
 
 	//Getters and Setters
 	public long getCodigoConsulta() {
@@ -29,22 +33,34 @@ public class Linha {
 		this.codigoConsulta = codigoConsulta;
 	}
 
-	public String getLinhaDigitada() {
-		return linhaDigitada;
+	public String getCodeBarDigitado() {
+		return codeBarDigitado;
 	}
 
-	public void setLinhaDigitada(String linhaDigitada) {
-		this.linhaDigitada = linhaDigitada;
+	public void setCodeBarDigitado(String codeBarDigitado) {
+		this.codeBarDigitado = codeBarDigitado;
 	}
+	
+	public String getCalculaLinha() {
+		return calculaLinha;
+	}
+
+	public void setCalculaLinha(String calculaLinha) {
+		this.calculaLinha = calculaLinha;
+	}
+	
+	//public String calculaLinha() {
+		//return codeBarDigitado;
+	//}
 	
 	//Outros Métodos
 	
-	public static String calculaLinha(String linhaDigitada) {
-		
-		String linha = linhaDigitada.replaceAll("[^0-9]", "");
+	public String calculaLinha(String codeBarDigitado) {
+		String feito;
+		String linha = codeBarDigitado.replaceAll("[^0-9]", "");
 		
 		if (linha.length() != 44) {
-			return null;
+			return "ERRO CODIGO DE BARRAS";
 		}
 		
 		String campo1 = linha.substring(0,4)+linha.substring(19,20)+'.'+linha.substring(20,24);
@@ -56,8 +72,7 @@ public class Linha {
 	    if ( modulo11Banco( linha.substring(0,4)+linha.substring(5,44) ) != Integer.valueOf(campo4) ) {
 	    	return null;
 	    }
-	    
-	    return campo1 + modulo10(campo1)
+	    feito = campo1 + modulo10(campo1)
 	    +' '
 	    +campo2 + modulo10(campo2)
         +' '
@@ -67,9 +82,13 @@ public class Linha {
         +' '
         +campo5
         ;
+	    
+	    setCalculaLinha(feito);
+	    codeBarDigitado = feito;
+	    return getCalculaLinha();
 }
 
-	public static int modulo10(String numero) {
+	public int modulo10(String numero) {
 			numero = numero.replaceAll("[^0-9]","");
 			int soma  = 0;
 			int peso  = 2;
@@ -91,7 +110,7 @@ public class Linha {
 			return digito;
 	}
 
-	public static int modulo11Banco(String numero) {
+	public int modulo11Banco(String numero) {
 		numero = numero.replaceAll("[^0-9]","");
 
 		int soma  = 0;
@@ -108,7 +127,7 @@ public class Linha {
 		}
 		int digito = 11 - (soma % 11);
 		if (digito >  9) digito = 0;
-		/* Utilizar o dígito 1(um) sempre que o resultado do cálculo padrão for igual a 0(zero), 1(um) ou 10(dez). */
+		// Utilizar o dígito 1(um) sempre que o resultado do cálculo padrão for igual a 0(zero), 1(um) ou 10(dez).
 		if (digito == 0) digito = 1;
 		return digito;
 		
